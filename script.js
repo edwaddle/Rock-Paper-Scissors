@@ -42,7 +42,7 @@ function getHumanChoice(){
                 rockChoice.remove();
                 scissorChoice.remove();
                 console.log("rock");
-                return ROCK_VALUE;
+                playRound(ROCK_VALUE, getComputerChoice());
             }
     
     
@@ -51,7 +51,7 @@ function getHumanChoice(){
                 rockChoice.remove();
                 scissorChoice.remove();
                 console.log("paper");
-                return PAPER_VALUE;
+                playRound(PAPER_VALUE, getComputerChoice());
             }
         
             scissorChoice.onclick = () => {
@@ -59,7 +59,7 @@ function getHumanChoice(){
                 rockChoice.remove();
                 scissorChoice.remove();
                 console.log("scissors");
-                return SCISSOR_VALUE;
+                playRound(SCISSOR_VALUE, computerChoice());
             }
 
 
@@ -102,11 +102,11 @@ function playRound(humanChoice, computerChoice){
 
 
 function playGame(){
-    let userChoice = getHumanChoice();
+    getHumanChoice();
     /*
     for (i = 0; i < 5; i++){
         setTimeout(function(){
-            playRound(getHumanChoice(), getComputerChoice());
+           
         }, 1000);
         
         
