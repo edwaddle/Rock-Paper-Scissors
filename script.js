@@ -21,21 +21,25 @@ function getComputerChoice(){
     //3 is scissors
 }
 
-function getHumanChoice(){
-    const paperChoice = document.createElement("button");
-    paperChoice.setAttribute('class', 'choice');  
-    paperChoice.textContent = 'Paper';
-    playerSelection.appendChild(paperChoice);
-
+function getHumanChoice(count){
+    if (count === 0){
+        return;
+    }
     const rockChoice = document.createElement("button");
     rockChoice.setAttribute('class', 'choice');  
     rockChoice.textContent = 'Rock';
     playerSelection.appendChild(rockChoice);
 
+    const paperChoice = document.createElement("button");
+    paperChoice.setAttribute('class', 'choice');  
+    paperChoice.textContent = 'Paper';
+    playerSelection.appendChild(paperChoice);
+
     const scissorChoice = document.createElement("button");
     scissorChoice.setAttribute('class', 'choice');  
     scissorChoice.textContent = 'Scissors';
     playerSelection.appendChild(scissorChoice);
+
          
            rockChoice.onclick = () => {
                 paperChoice.remove();
@@ -43,6 +47,7 @@ function getHumanChoice(){
                 scissorChoice.remove();
                 console.log("rock");
                 playRound(ROCK_VALUE, getComputerChoice());
+                return getHumanChoice(--count);
             }
     
     
@@ -52,6 +57,7 @@ function getHumanChoice(){
                 scissorChoice.remove();
                 console.log("paper");
                 playRound(PAPER_VALUE, getComputerChoice());
+                return getHumanChoice(--count);
             }
         
             scissorChoice.onclick = () => {
@@ -59,11 +65,9 @@ function getHumanChoice(){
                 rockChoice.remove();
                 scissorChoice.remove();
                 console.log("scissors");
-                playRound(SCISSOR_VALUE, computerChoice());
+                playRound(SCISSOR_VALUE, getComputerChoice());
+                return getHumanChoice(--count);
             }
-
-
-    
 
 }
 
@@ -93,7 +97,7 @@ function playRound(humanChoice, computerChoice){
             ++computerScore;
         }
         else if (computerChoice === PAPER_VALUE){
-            ++humanChoice;
+            ++humanScore;
         }
     }
     console.log( humanScore + " " + computerScore + ". " + humanChoice + " " + computerChoice);
@@ -102,7 +106,7 @@ function playRound(humanChoice, computerChoice){
 
 
 function playGame(){
-    getHumanChoice();
+    getHumanChoice(5);
     /*
     for (i = 0; i < 5; i++){
         setTimeout(function(){
